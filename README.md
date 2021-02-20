@@ -6,4 +6,4 @@ It performs simple raycasting in order to navigate a space, imitating a very bas
 
 The environment is generated with marching squares built from 3D perlin noise.
 
-
+![](screencap.gif)
