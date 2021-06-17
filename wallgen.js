@@ -1,4 +1,5 @@
 class wallgen {
+  //pretty much just marching squares generated from noise, nothing fancy
   constructor(walls, time) {
     this.walls = walls;
     this.time = time;
