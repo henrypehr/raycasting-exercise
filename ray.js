@@ -3,6 +3,7 @@ class Ray {
     this.ang = ang;
     this.pos = pos;
     this.dir = p5.Vector.fromAngle(ang);
+    // this is maybe not needed
     this.u;
     this.len;
   }
@@ -21,6 +22,8 @@ class Ray {
   }
 
   cast(wall) {
+    // get all those variables we need for a line-line intersection formula using determinants
+    // found here: https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
     const x1 = wall.a.x;
     const y1 = wall.a.y;
     const x2 = wall.b.x;
@@ -30,12 +33,14 @@ class Ray {
     const y3 = this.pos.y;
     const x4 = this.pos.x + this.dir.x;
     const y4 = this.pos.y + this.dir.y;
-
+    //formula for finding intersection of two lines
+    //denominator
     const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
     if (den == 0) {
       return;
     }
-
+    // intersection is true if 0 >= t <= 1 and u > 0
+    // u is also related to distance of ray so we could use that instead of calculating distance formula for every ray
     const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
     const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
     this.u = u;
@@ -48,7 +53,7 @@ class Ray {
       return;
     }
   }
-
+  // set direction of ray with angle
   setAngle(angle) {
     this.dir = p5.Vector.fromAngle(angle);
   }
